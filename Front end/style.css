@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url('c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/istockphoto-1419766496-612x612.WEBP');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+header {
+    background: darkgreen;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#presentation {
+    margin: 20px 0;
+    padding: 20px;
+    background: darkturquoise;
+    border-radius: 30px;
+}
+
+#diaporama {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#diaporama img {
+    width: 700px;
+    height: 600px;
+    object-fit: cover;
+    display: none;
+    margin: 0 auto;
+}
+
+#events {
+    margin: 20px 0;
+    padding: 20px;
+    background: darkgreen;
+    border-radius: 30px;
+}
+
+.event {
+    margin: 10px 0;
+    padding: 10px;
+    background: #e2e2e2;
+    border-radius: 5px;
+}
+
+.menu {
+    background-color: darkgreen;
+    color: #fff;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu>ul>li {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: darkgreen;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.menu>ul>li:hover .submenu {
+    display: block;
+}
+
+#login-form,
+#create-event-form {
+    display: none;
+    /* Cacher par défaut */
+    background: white;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 300px;
+    /* Taille d'origine du formulaire de connexion */
+}
+
+#create-event-form {
+    width: 450px;
+    /* 1.5 fois la largeur du formulaire de connexion */
+    height: 600px;
+    /* 2 fois la hauteur du formulaire de connexion */
+}
+
+#login-form label,
+#create-event-form label {
+    display: block;
+    margin: 10px 0 5px;
+    color: black;
+}
+
+#login-form input,
+#create-event-form input,
+#create-event-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    /* Vert */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Vert plus foncé */
+}
+
+#create-event-form textarea {
+    height: 100px;
+    resize: vertical;
+    /* Permet de redimensionner verticalement */
+}

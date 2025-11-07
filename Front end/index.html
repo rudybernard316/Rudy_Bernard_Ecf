@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ecfStudi.css">
+    <title>Esportify - Page d'accueil</title>
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenue sur Esportify</h1>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Retour à la page d'accueil</a></li>
+                <li>
+                    <a href="#" id="access-events-link">Accès à tous les événements</a>
+                    <ul class="submenu">
+                        <li><a href="#" id="create-tournament-link" style="display: none;">Créer un Événement</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Connexion</a>
+                    <ul class="submenu">
+                        <li><a href="#">Créer un compte</a></li>
+                        <li><a href="#" id="login-link">Connexion</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Formulaire de Création d'Événement -->
+        <div id="create-event-form">
+            <h2>Créer un Événement</h2>
+            <form id="form-create-event">
+                <label for="event-title">Titre :</label>
+                <input type="text" id="event-title" required>
+
+                <label for="event-description">Description :</label>
+                <textarea id="event-description" required></textarea>
+
+                <label for="player-count">Nombre de joueurs :</label>
+                <input type="number" id="player-count" required>
+
+                <label for="event-images">Images (URLs) :</label>
+                <input type="text" id="event-images" placeholder="Entrez l'URL de l'image">
+
+                <label for="start-date">Date et Heure de Début :</label>
+                <input type="datetime-local" id="start-date" required>
+
+                <label for="end-date">Date et Heure de Fin :</label>
+                <input type="datetime-local" id="end-date" required>
+
+                <label for="organizer-pseudo">Pseudo de l'Organisateur :</label>
+                <input type="text" id="organizer-pseudo" required>
+
+                <label for="visibility">Visibilité :</label>
+                <select id="visibility" required>
+                    <option value="visible">Visible</option>
+                    <option value="hidden">Non visible</option>
+                    <option value="pending">En cours de validation</option>
+                </select>
+
+                <button type="submit">Créer l'Événement</button>
+                <button type="button" id="cancel-create-event-button">Annuler</button> <!-- Ajout du bouton Annuler -->
+            </form>
+        </div>
+    </header>
+
+    <!-- Formulaire de connexion -->
+    <div id="login-form">
+        <h2>Connexion</h2>
+        <form id="form-login">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Se connecter</button>
+            <button type="button" id="cancel-login-button">Annuler</button> <!-- Ajout de l'ID ici -->
+        </form>
+    </div>
+
+    <div class="container">
+        <h2 class="logo"><img
+                src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/logoEsportify.png"> </h2>
+
+        <section id="diaporama">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/Thumbnail.WEBP"
+                alt="Image 5">
+            <img class="lol" src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/lol.jpg"
+                alt="Image 1">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/pubg-circle-battlegrounds-photo-23.png"
+                alt="Image 2">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/deavth1-e3d3503e-41e2-4707-8b3b-8130272df7de.png"
+                alt="Image 3">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/esport-france-equipes-streamers.jpg"
+                alt="Image 4">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/lfldays-nice-j1-047-1-scaled.WEBP"
+                alt="Image 6">
+            <div>
+                <button onclick="prevSlide()">Précédent</button>
+                <button onclick="nextSlide()">Suivant</button>
+            </div>
+        </section>
+
+        <section id="events">
+            <h2>Événements E-sport à venir</h2>
+            <div class="event">
+                <h3>Titre de l'événement 1</h3>
+                <p>Date : Lundi 10 Février 2025 2:30 AM GMT +5 </p>
+                <p>Description : Tournoi League Of Legend</p>
+                <button
+                    onclick="showEventDetails('Titre de l\'événement 1', 'Lundi 10 Février 2025 2:30 AM GMT +5', 10)">Voir
+                    Détails</button>
+                <button class="participate-button"
+                    onclick="registerPlayer('Titre de l\'événement 1', 10)">Participer</button>
+                <p>Inscrits : <span id="registered-count1">0</span> / 10</p>
+                <div style="width:100%; background-color:lightgray;">
+                    <div id="progress-bar1" style="height: 20px; width: 0; background-color: green;"></div>
+                </div>
+                <button class="launch-button"
+                    onclick="launchEvent('Titre de l\'événement 1', 'Lundi 10 Février 2025 2:30 AM GMT +5')"
+                    disabled>Lancer l'événement</button>
+            </div>
+            <div class="event">
+                <h3>Titre de l'événement 2</h3>
+                <p>Date : Samedi 15 Février 2025 2:30 AM GMT + 9</p>
+                <p>Description : Tournoi Valorant.</p>
+                <button
+                    onclick="showEventDetails('Titre de l\'événement 2', 'Samedi 15 Février 2025 2:30 AM GMT +9', 8)">Voir
+                    Détails</button>
+                <button class="participate-button"
+                    onclick="registerPlayer('Titre de l\'événement 2', 8)">Participer</button>
+                <p>Inscrits : <span id="registered-count2">0</span> / 8</p>
+                <div style="width:100%; background-color:lightgray;">
+                    <div id="progress-bar2" style="height: 20px; width: 0; background-color: green;"></div>
+                </div>
+                <button class="launch-button"
+                    onclick="launchEvent('Titre de l\'événement 2', 'Samedi 15 Février 2025 2:30 AM GMT +9')"
+                    disabled>Lancer l'événement</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="presentation">
+        <section id="presentation">
+            <h2>Qui est Esportify ?</h2>
+            <p>Esportify est une plateforme dédiée à l'univers des esports, offrant des solutions innovantes pour les
+                joueurs, les équipes et les fans. Notre mission est de promouvoir les esports en facilitant l'accès à
+                des tournois, des outils d'analyse et une communauté dynamique.</p>
+        </section>
+    </div>
+
+    <div id="actions"></div> <!-- Ajout de l'élément pour afficher les actions -->
+</body>
+
+<script src="ecfStudi.js"></script>
+</body>
+
+</html>

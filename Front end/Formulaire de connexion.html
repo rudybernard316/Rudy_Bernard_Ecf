@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/istockphoto-1419766496-612x612.WEBP');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background: darkgreen;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        #presentation {
+            margin: 20px 0;
+            padding: 20px;
+            background: darkturquoise;
+            border-radius: 30px;
+        }
+
+        #diaporama {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #diaporama img {
+            width: 700px;
+            height: 600px;
+            object-fit: cover;
+            display: none;
+            margin: 0 auto;
+        }
+
+        #events {
+            margin: 20px 0;
+            padding: 20px;
+            background: darkgreen;
+            border-radius: 30px;
+        }
+
+        .event {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e2e2e2;
+            border-radius: 5px;
+        }
+
+        .menu {
+            background-color: darkgreen;
+            color: #fff;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu>ul>li {
+            display: inline-block;
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        .menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: darkgreen;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .menu>ul>li:hover .submenu {
+            display: block;
+        }
+
+        #login-form,
+        #create-event-form {
+            display: none;
+            /* Cacher par défaut */
+            background: white;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 300px;
+            /* Taille d'origine du formulaire de connexion */
+        }
+
+        #create-event-form {
+            width: 450px;
+            /* 1.5 fois la largeur du formulaire de connexion */
+            height: 600px;
+            /* 2 fois la hauteur du formulaire de connexion */
+        }
+
+        #login-form label,
+        #create-event-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: black;
+        }
+
+        #login-form input,
+        #create-event-form input,
+        #create-event-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* Vert */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Vert plus foncé */
+        }
+
+        #create-event-form textarea {
+            height: 100px;
+            resize: vertical;
+            /* Permet de redimensionner verticalement */
+        }
+    </style>
+
+    <title>Esportify - Page d'accueil</title>
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenue sur Esportify</h1>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Retour à la page d'accueil</a></li>
+                <li>
+                    <a href="#" id="access-events-link">Accès à tous les événements</a>
+                    <ul class="submenu">
+                        <li><a href="#" id="create-tournament-link" style="display: none;">Créer un Événement</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Connexion</a>
+                    <ul class="submenu">
+                        <li><a href="#">Créer un compte</a></li>
+                        <li><a href="#" id="login-link">Connexion</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Formulaire de Création d'Événement -->
+        <div id="create-event-form">
+            <h2>Créer un Événement</h2>
+            <form id="form-create-event">
+                <label for="event-title">Titre :</label>
+                <input type="text" id="event-title" required>
+
+                <label for="event-description">Description :</label>
+                <textarea id="event-description" required></textarea>
+
+                <label for="player-count">Nombre de joueurs :</label>
+                <input type="number" id="player-count" required>
+
+                <label for="event-images">Images (URLs) :</label>
+                <input type="text" id="event-images" placeholder="Entrez l'URL de l'image">
+
+                <label for="start-date">Date et Heure de Début :</label>
+                <input type="datetime-local" id="start-date" required>
+
+                <label for="end-date">Date et Heure de Fin :</label>
+                <input type="datetime-local" id="end-date" required>
+
+                <label for="organizer-pseudo">Pseudo de l'Organisateur :</label>
+                <input type="text" id="organizer-pseudo" required>
+
+                <label for="visibility">Visibilité :</label>
+                <select id="visibility" required>
+                    <option value="visible">Visible</option>
+                    <option value="hidden">Non visible</option>
+                    <option value="pending">En cours de validation</option>
+                </select>
+
+                <button type="submit">Créer l'Événement</button>
+                <button type="button" id="cancel-create-event-button">Annuler</button> <!-- Ajout du bouton Annuler -->
+            </form>
+        </div>
+    </header>
+
+    <!-- Formulaire de connexion -->
+    <div id="login-form">
+        <h2>Connexion</h2>
+        <form id="form-login">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Se connecter</button>
+            <button type="button" id="cancel-login-button">Annuler</button> <!-- Ajout de l'ID ici -->
+        </form>
+    </div>
+
+    <div class="container">
+        <h2 class="logo"><img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/logoEsportify.png">
+        </h2>
+
+        <section id="diaporama">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/Thumbnail.WEBP" alt="Image 5">
+            <img class="lol" src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/lol.jpg" alt="Image 1">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/pubg-circle-battlegrounds-photo-23.png"
+                alt="Image 2">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/deavth1-e3d3503e-41e2-4707-8b3b-8130272df7de.png"
+                alt="Image 3">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/esport-france-equipes-streamers.jpg"
+                alt="Image 4">
+            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/ressourcesImg/lfldays-nice-j1-047-1-scaled.WEBP"
+                alt="Image 6">
+            <div>
+                <button onclick="prevSlide()">Précédent</button>
+                <button onclick="nextSlide()">Suivant</button>
+            </div>
+        </section>
+
+        <section id="events">
+            <h2>Événements E-sport à venir</h2>
+            <div class="event">
+                <h3>Titre de l'événement 1</h3>
+                <p>Date : Lundi 10 Février 2025 2:30 AM GMT +5 </p>
+                <p>Description : Tournoi League Of Legend</p>
+                <button
+                    onclick="showEventDetails('Titre de l\'événement 1', 'Lundi 10 Février 2025 2:30 AM GMT +5', 10)">Voir
+                    Détails</button>
+                <button class="participate-button"
+                    onclick="registerPlayer('Titre de l\'événement 1', 10)">Participer</button>
+                <p>Inscrits : <span id="registered-count1">0</span> / 10</p>
+                <div style="width:100%; background-color:lightgray;">
+                    <div id="progress-bar1" style="height: 20px; width: 0; background-color: green;"></div>
+                </div>
+                <button class="launch-button"
+                    onclick="launchEvent('Titre de l\'événement 1', 'Lundi 10 Février 2025 2:30 AM GMT +5')"
+                    disabled>Lancer l'événement</button>
+            </div>
+            <div class="event">
+                <h3>Titre de l'événement 2</h3>
+                <p>Date : Samedi 15 Février 2025 2:30 AM GMT + 9</p>
+                <p>Description : Tournoi Valorant.</p>
+                <button
+                    onclick="showEventDetails('Titre de l\'événement 2', 'Samedi 15 Février 2025 2:30 AM GMT +9', 8)">Voir
+                    Détails</button>
+                <button class="participate-button"
+                    onclick="registerPlayer('Titre de l\'événement 2', 8)">Participer</button>
+                <p>Inscrits : <span id="registered-count2">0</span> / 8</p>
+                <div style="width:100%; background-color:lightgray;">
+                    <div id="progress-bar2" style="height: 20px; width: 0; background-color: green;"></div>
+                </div>
+                <button class="launch-button"
+                    onclick="launchEvent('Titre de l\'événement 2', 'Samedi 15 Février 2025 2:30 AM GMT +9')"
+                    disabled>Lancer l'événement</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="presentation">
+        <section id="presentation">
+            <h2>Qui est Esportify ?</h2>
+            <p>Esportify est une plateforme dédiée à l'univers des esports, offrant des solutions innovantes pour les
+                joueurs, les équipes et les fans. Notre mission est de promouvoir les esports en facilitant l'accès à
+                des tournois, des outils d'analyse et une communauté dynamique.</p>
+        </section>
+    </div>
+
+    <div id="actions"></div> <!-- Ajout de l'élément pour afficher les actions -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('#diaporama img');
+            slides[currentSlide].style.display = 'block';
+
+            function nextSlide() {
+                slides[currentSlide].style.display = 'none';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].style.display = 'block';
+            }
+
+            function prevSlide() {
+                slides[currentSlide].style.display = 'none';
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                slides[currentSlide].style.display = 'block';
+            }
+
+            // Ajoutez les événements aux boutons
+            document.querySelector('button[onclick="nextSlide()"]').addEventListener('click', nextSlide);
+            document.querySelector('button[onclick="prevSlide()"]').addEventListener('click', prevSlide);
+
+
+            document.querySelectorAll('.submenu a').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (this.innerText === 'Créer un compte') {
+                        alert('Fonctionnalité de création de compte en cours de développement.');
+                    } else if (this.innerText === 'Connexion') {
+                        document.getElementById('login-form').style.display = 'block';
+                    }
+                });
+            });
+            // Fonction pour afficher les détails de l'événement dans une fenêtre pop-up
+            function showEventDetails(title, date, playerCount) {
+                alert(`Titre de l'événement : ${title}\nDate/Heure : ${date}\nNombre de joueurs : ${playerCount}`);
+            }
+
+
+            // Simulez un utilisateur avec le rôle d'administrateur
+            let currentUser = { role: 'administrateur' };
+
+            // Ajoutez un élément pour les actions
+            const actionsDiv = document.getElementById('actions');
+
+            // Fonction pour afficher les actions selon le rôle
+            function displayActions() {
+                actionsDiv.innerHTML = ''; // Réinitialiser les actions
+                if (!currentUser) {
+                    actionsDiv.innerHTML = '<p>Vous êtes un Visiteur. Connectez-vous pour accéder aux fonctionnalités.</p>';
+                } else if (currentUser.role === 'administrateur') {
+                    actionsDiv.innerHTML = `
+                        <p>Vous êtes un Administrateur.</p>
+                        <button onclick="validateOrganizer()">Valider un organisateur</button>
+                        <button onclick="administerUsers()">Administrer les utilisateurs</button>
+                        <button onclick="administerEvents()">Administrer les événements</button>
+                        <button onclick="registerEvent()">S'inscrire à un événement</button>
+                        <button onclick="leaveEvent()">Se désinscrire d'un événement</button>
+                        <button onclick="participateDiscussion()">Participer à une discussion</button>
+                    `;
+                } else if (currentUser.role === 'organisateur') {
+                    actionsDiv.innerHTML = `
+                        <p>Vous êtes un Organisateur.</p>
+                        <button onclick="createEvent()">Créer un Événement</button>
+                    `;
+                }
+            }
+
+            // Appel initial pour afficher les actions
+            displayActions();
+
+            // Fermer le formulaire de connexion
+            function closeLoginForm() {
+                document.getElementById('login-form').style.display = 'none'; // Cache le formulaire
+            }
+
+            // Écouteur d'événements pour le bouton "Annuler"
+            document.getElementById('cancel-login-button').addEventListener('click', closeLoginForm);
+
+
+            // Gérer la soumission du formulaire de connexion
+            document.getElementById('form-login').addEventListener('submit', function (event) {
+                event.preventDefault(); // Empêche le rechargement de la page
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Simuler la validation des identifiants
+                if (username === 'admin' && password === 'mdp') {
+                    alert(`Connexion réussie pour ${username}!`); // Alerte de connexion réussie
+                    currentUser = { role: 'administrateur' }; // Mettez à jour le rôle de currentUser
+                    displayActions(); // Mettre à jour l'affichage des actions
+                    closeLoginForm(); // Ferme le formulaire après la connexion
+                } else {
+                    alert('Identifiants incorrects.');
+                }
+            });
+
+            // Fonctions pour les actions
+            function registerEvent() {
+                alert("Inscription à un événement réussie !");
+            }
+
+            function leaveEvent() {
+                alert("Désinscription d'un événement réussie !");
+            }
+
+            function participateDiscussion() {
+                alert("Participation à une discussion !");
+            }
+
+            function createEvent() {
+                alert("Événement créé (en attente de validation) !");
+            }
+
+            function validateOrganizer() {
+                alert("Organisateur validé !");
+            }
+
+            function administerUsers() {
+                alert("Administration des utilisateurs !");
+            }
+
+            function administerEvents() {
+                alert("Administration des événements !");
+            }
+
+            // Afficher le lien "Créer un Événement" lors du survol
+            const accessEventsLink = document.getElementById('access-events-link');
+            const createTournamentLink = document.getElementById('create-tournament-link');
+            const createEventForm = document.getElementById('create-event-form');
+            let timeoutId; // Pour gérer le timeout
+
+            accessEventsLink.addEventListener('mouseover', function () {
+                if (currentUser && (currentUser.role === 'organisateur' || currentUser.role === 'administrateur')) {
+                    createTournamentLink.style.display = 'block';
+                    clearTimeout(timeoutId); // Réinitialiser le timeout si la souris reste au-dessus
+                }
+            });
+
+            accessEventsLink.addEventListener('mouseout', function () {
+                timeoutId = setTimeout(() => {
+                    createTournamentLink.style.display = 'none'; // Cache le lien après 4 secondes
+                }, 4000);
+            });
+
+            // Afficher le formulaire de création d'événement
+            createTournamentLink.addEventListener('click', function (event) {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+                createEventForm.style.display = 'block'; // Affiche le formulaire de création d'événement
+            });
+
+            // Gérer la soumission du formulaire de création d'événement
+            document.getElementById('form-create-event').addEventListener('submit', function (event) {
+                event.preventDefault();
+                alert("Événement soumis avec succès !");
+                createEventForm.style.display = 'none'; // Ferme le formulaire après soumission
+            });
+
+            // Afficher le formulaire de connexion
+            const loginLink = document.getElementById('login-link');
+            if (loginLink) {
+                loginLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.getElementById('login-form').style.display = 'block';
+                });
+            }
+
+            // Fermer le formulaire de création d'événement
+            function closeCreateEventForm() {
+                createEventForm.style.display = 'none'; // Cache le formulaire
+            }
+
+            // Écouteur d'événements pour le bouton "Annuler"
+            document.getElementById('cancel-create-event-button').addEventListener('click', closeCreateEventForm);
+
+            // Appel initial pour afficher les actions
+            displayActions();
+        });
+
+        // Fonction pour lancer l'événement
+        function launchEvent(title, date) {
+            const eventTime = new Date(date);
+            const now = new Date();
+
+            if (eventTime - now <= 30 * 60 * 1000 && eventTime > now) { // Vérifie si l'événement commence dans moins de 30 minutes
+                alert(`L'événement "${title}" a été lancé avec succès !`);
+                // Ici, vous pouvez ajouter la logique pour démarrer l'événement
+            } else {
+                alert(`L'événement "${title}" ne peut pas être lancé. Assurez-vous qu'il commence dans les 30 prochaines minutes.`);
+            }
+        }
+
+        // Fonction pour vérifier l'état du bouton de lancement
+        function checkLaunchButtons() {
+            const events = document.querySelectorAll('.event');
+            const now = new Date();
+
+            events.forEach(event => {
+                const dateText = event.querySelector('p').innerText.split(' : ')[1]; // Récupère la date de l'événement
+                const eventTime = new Date(dateText);
+
+                const launchButton = event.querySelector('.launch-button');
+                if (eventTime - now <= 30 * 60 * 1000 && eventTime > now) {
+                    launchButton.disabled = false; // Active le bouton si l'événement commence dans les 30 prochaines minutes
+                } else {
+                    launchButton.disabled = true; // Désactive le bouton sinon
+                }
+            });
+        }
+
+        // Appeler la fonction pour vérifier l'état des boutons au chargement de la page
+        window.onload = checkLaunchButtons;
+
+        // Fonction pour enregistrer un joueur
+        function registerPlayer(eventTitle, maxPlayers) {
+            const registeredCountElement = document.getElementById(`registered-count${eventTitle === 'Titre de l\'événement 1' ? '1' : '2'}`);
+            const registeredCount = parseInt(registeredCountElement.innerText);
+
+            // Vérifie si l'inscription est possible
+            if (registeredCount < maxPlayers) {
+                registeredCountElement.innerText = registeredCount + 1; // Incrémente le nombre d'inscrits
+                updateProgressBar(eventTitle, maxPlayers, registeredCount + 1); // Met à jour la jauge
+            } else {
+                alert(`L'événement "${eventTitle}" est complet. Inscription impossible.`);
+            }
+        }
+
+        // Fonction pour mettre à jour la jauge d'inscription
+        function updateProgressBar(eventTitle, maxPlayers, currentCount) {
+            const progressBar = document.getElementById(`progress-bar${eventTitle === 'Titre de l\'événement 1' ? '1' : '2'}`);
+            const percentage = (currentCount / maxPlayers) * 100;
+            progressBar.style.width = percentage + '%'; // Met à jour la largeur de la jauge
+        }
+
+        // Fonction pour annuler l'inscription d'un joueur
+        function cancelRegistration(eventTitle) {
+            const registeredCountElement = document.getElementById(`registered-count${eventTitle === 'Titre de l\'événement 1' ? '1' : '2'}`);
+            const registeredCount = parseInt(registeredCountElement.innerText);
+
+            if (registeredCount > 0) {
+                registeredCountElement.innerText = registeredCount - 1; // Décrémente le nombre d'inscrits
+                updateProgressBar(eventTitle, eventTitle === 'Titre de l\'événement 1' ? 10 : 8, registeredCount - 1); // Met à jour la jauge
+            } else {
+                alert(`Aucun joueur inscrit à "${eventTitle}" pour annuler.`);
+            }
+        }
+
+        document.getElementById('form-create-event').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+            await createEvent(); // Appel à la fonction pour créer l'événement
+        });
+
+        async function createEvent() {
+            const eventData = {
+                title: document.getElementById('event-title').value,
+                description: document.getElementById('event-description').value,
+                date: new Date(document.getElementById('start-date').value),
+                maxPlayers: parseInt(document.getElementById('player-count').value),
+                organizer: document.getElementById('organizer-pseudo').value,
+                visibility: document.getElementById('visibility').value
+            };
+
+            try {
+                const response = await fetch('/api/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(eventData)
+                });
+                const result = await response.json();
+                alert(`Événement créé avec ID: ${result.id}`);
+            } catch (error) {
+                console.error('Erreur lors de la création de l\'événement:', error);
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
