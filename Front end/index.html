@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ecfStudi.css">
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
     <title>Esportify - Page d'accueil</title>
 </head>
 
@@ -13,7 +13,7 @@
         <h1>Bienvenue sur Esportify</h1>
         <nav class="menu">
             <ul>
-                <li><a href="#">Retour à la page d'accueil</a></li>
+                <li><a href="index.html">Retour à la page d'accueil</a></li>
                 <li>
                     <a href="#" id="access-events-link">Accès à tous les événements</a>
                     <ul class="submenu">
@@ -36,34 +36,26 @@
             <form id="form-create-event">
                 <label for="event-title">Titre :</label>
                 <input type="text" id="event-title" required>
-
                 <label for="event-description">Description :</label>
                 <textarea id="event-description" required></textarea>
-
                 <label for="player-count">Nombre de joueurs :</label>
                 <input type="number" id="player-count" required>
-
                 <label for="event-images">Images (URLs) :</label>
                 <input type="text" id="event-images" placeholder="Entrez l'URL de l'image">
-
                 <label for="start-date">Date et Heure de Début :</label>
                 <input type="datetime-local" id="start-date" required>
-
                 <label for="end-date">Date et Heure de Fin :</label>
                 <input type="datetime-local" id="end-date" required>
-
                 <label for="organizer-pseudo">Pseudo de l'Organisateur :</label>
                 <input type="text" id="organizer-pseudo" required>
-
                 <label for="visibility">Visibilité :</label>
                 <select id="visibility" required>
                     <option value="visible">Visible</option>
                     <option value="hidden">Non visible</option>
                     <option value="pending">En cours de validation</option>
                 </select>
-
                 <button type="submit">Créer l'Événement</button>
-                <button type="button" id="cancel-create-event-button">Annuler</button> <!-- Ajout du bouton Annuler -->
+                <button type="button" id="cancel-create-event-button">Annuler</button>
             </form>
         </div>
     </header>
@@ -74,32 +66,24 @@
         <form id="form-login">
             <label for="username">Nom d'utilisateur :</label>
             <input type="text" id="username" name="username" required>
-
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required>
-
             <button type="submit">Se connecter</button>
-            <button type="button" id="cancel-login-button">Annuler</button> <!-- Ajout de l'ID ici -->
+            <button type="button" id="cancel-login-button">Annuler</button>
         </form>
     </div>
 
     <div class="container">
-        <h2 class="logo"><img
-                src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/logoEsportify.png"> </h2>
+        <h2 class="logo"><img src="ressourcesImg/logoEsportify.png" alt="Logo Esportify"></h2>
+        <!-- Utilisez un chemin relatif -->
 
         <section id="diaporama">
-            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/Thumbnail.WEBP"
-                alt="Image 5">
-            <img class="lol" src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/lol.jpg"
-                alt="Image 1">
-            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/pubg-circle-battlegrounds-photo-23.png"
-                alt="Image 2">
-            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/deavth1-e3d3503e-41e2-4707-8b3b-8130272df7de.png"
-                alt="Image 3">
-            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/esport-france-equipes-streamers.jpg"
-                alt="Image 4">
-            <img src="c:/Users/User/Desktop/Project_dev_Web/ecfStudi/frontEnd/ressourcesImg/lfldays-nice-j1-047-1-scaled.WEBP"
-                alt="Image 6">
+            <img src="ressourcesImg/Thumbnail.WEBP" alt="Image 5">
+            <img class="lol" src="ressourcesImg/lol.jpg" alt="Image 1">
+            <img src="ressourcesImg/pubg-circle-battlegrounds-photo-23.png" alt="Image 2">
+            <img src="ressourcesImg/deavth1-e3d3503e-41e2-4707-8b3b-8130272df7de.png" alt="Image 3">
+            <img src="ressourcesImg/esport-france-equipes-streamers.jpg" alt="Image 4">
+            <img src="ressourcesImg/lfldays-nice-j1-047-1-scaled.WEBP" alt="Image 6">
             <div>
                 <button onclick="prevSlide()">Précédent</button>
                 <button onclick="nextSlide()">Suivant</button>
@@ -110,7 +94,7 @@
             <h2>Événements E-sport à venir</h2>
             <div class="event">
                 <h3>Titre de l'événement 1</h3>
-                <p>Date : Lundi 10 Février 2025 2:30 AM GMT +5 </p>
+                <p>Date : Lundi 10 Février 2025 2:30 AM GMT +5</p>
                 <p>Description : Tournoi League Of Legend</p>
                 <button
                     onclick="showEventDetails('Titre de l\'événement 1', 'Lundi 10 Février 2025 2:30 AM GMT +5', 10)">Voir
@@ -154,10 +138,9 @@
         </section>
     </div>
 
-    <div id="actions"></div> <!-- Ajout de l'élément pour afficher les actions -->
-</body>
+    <div id="actions"></div>
 
-<script src="ecfStudi.js"></script>
+    <script src="index.js"></script> <!-- Lien vers le fichier JavaScript -->
 </body>
 
 </html>
