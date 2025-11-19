@@ -26,7 +26,12 @@
                         <li><a href="#" id="login-link">Connexion</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Contact</a></li>
+                <li>
+                    <a href="#">Contact</a>
+                    <ul class="submenu">
+                        <li>Notre Email : <a href="mailto:contact@esportify.com">contact@esportify.com</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
@@ -60,6 +65,7 @@
         </div>
     </header>
 
+
     <!-- Formulaire de connexion -->
     <div id="login-form">
         <h2>Connexion</h2>
@@ -72,6 +78,22 @@
             <button type="button" id="cancel-login-button">Annuler</button>
         </form>
     </div>
+    <div id="filter-form">
+        <h2>Filtrer les Événements</h2>
+        <form id="form-filter-events">
+            <label for="filter-date">Date :</label>
+            <input type="datetime-local" id="filter-date">
+
+            <label for="filter-players">Nombre de Joueurs :</label>
+            <input type="number" id="filter-players" placeholder="Max joueurs">
+
+            <label for="filter-organizer">Organisateur :</label>
+            <input type="text" id="filter-organizer" placeholder="Nom de l'organisateur">
+
+            <button type="submit">Filtrer</button>
+        </form>
+    </div>
+
 
     <div class="container">
         <h2 class="logo"><img src="ressourcesImg/logoEsportify.png" alt="Logo Esportify"></h2>
@@ -129,6 +151,7 @@
         </section>
     </div>
 
+
     <div class="presentation">
         <section id="presentation">
             <h2>Qui est Esportify ?</h2>
@@ -142,5 +165,24 @@
 
     <script src="index.js"></script> <!-- Lien vers le fichier JavaScript -->
 </body>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 Esportify. Tous droits réservés.</p>
+        <ul class="social-links">
+            <li><a href="#" target="_blank">Facebook</a></li>
+            <li><a href="#" target="_blank">Twitter</a></li>
+            <li><a href="#" target="_blank">Instagram</a></li>
+            <li><a href="#" target="_blank">YouTube</a></li>
+        </ul>
+        <div class="contact-info">
+            <p>Contactez-nous : <a href="mailto:contact@esportify.com">contact@esportify.com</a></p>
+            <p>Téléphone : +33 1 23 45 67 89</p>
+        </div>
+        <div class="legal-info">
+            <p><a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+        </div>
+    </div>
+</footer>
+
 
 </html>

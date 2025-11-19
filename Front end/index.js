@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (this.innerText === 'Créer un compte') {
                 alert('Fonctionnalité de création de compte en cours de développement.');
             } else if (this.innerText === 'Connexion') {
-                document.getElementById('login-form').style.display = 'block';
+                // Rediriger vers la page de connexion
+                window.location.href = 'Formulaire de connexion.html'; // Remplacez 'connexion.html' par le nom de votre fichier de connexion
             }
         });
     });
+
     // Fonction pour afficher les détails de l'événement dans une fenêtre pop-up
     function showEventDetails(title, date, playerCount) {
         alert(`Titre de l'événement : ${title}\nDate/Heure : ${date}\nNombre de joueurs : ${playerCount}`);
@@ -270,5 +272,59 @@ async function createEvent() {
         alert(`Événement créé avec ID: ${result.id}`);
     } catch (error) {
         console.error('Erreur lors de la création de l\'événement:', error);
+    }
+}
+
+document.getElementById('form-filter-events').addEventListener('submit', function (event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+
+    const filterDate = document.getElementById('filter-date').value;
+    const filterPlayers = document.getElementById('filter-players').value;
+    const filterOrganizer = document.getElementById('filter-organizer').value;
+
+    // Appel de la fonction pour filtrer les événements
+    filterEvents(filterDate, filterPlayers, filterOrganizer);
+});
+
+async function filterEvents(date, maxPlayers, organizer) {
+    try {
+        const response = await fetch('/api/events'); // Remplacez par l'URL de votre API pour récupérer tous les événements
+        const events = await response.json();
+
+        // Filtrer les événements selon les critères
+        const filteredEvents = events.filter(event => {
+            const eventDate = new Date(event.date);
+            const isDateMatch = date ? eventDate.toISOString().slice(0, 16) === date : true;
+            const isPlayersMatch = maxPlayers ? event.maxPlayers <= maxPlayers : true;
+            const isOrganizerMatch = organizer ? event.organizer.toLowerCase().includes(organizer.toLowerCase()) : true;
+
+            return isDateMatch && isPlayersMatch && isOrganizerMatch;
+        });
+
+        displayFilteredEvents(filteredEvents); // Fonction pour afficher les événements filtrés
+    } catch (error) {
+        console.error('Erreur lors du filtrage des événements:', error);
+    }
+}
+
+function displayFilteredEvents(events) {
+    const eventsContainer = document.getElementById('events');
+    eventsContainer.innerHTML = ''; // Réinitialiser l'affichage
+
+    if (events.length === 0) {
+        eventsContainer.innerHTML = '<p>Aucun événement trouvé.</p>';
+    } else {
+        events.forEach(event => {
+            const eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.innerHTML = `
+                <h3>${event.title}</h3>
+                <p>Date : ${new Date(event.date).toLocaleString()}</p>
+                <p>Description : ${event.description}</p>
+                <p>Organisateur : ${event.organizer}</p>
+                <p>Max Joueurs : ${event.maxPlayers}</p>
+            `;
+            eventsContainer.appendChild(eventElement);
+        });
     }
 }
