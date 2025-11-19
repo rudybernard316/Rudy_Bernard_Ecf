@@ -41,28 +41,37 @@
             <form id="form-create-event">
                 <label for="event-title">Titre :</label>
                 <input type="text" id="event-title" required>
+
                 <label for="event-description">Description :</label>
                 <textarea id="event-description" required></textarea>
+
                 <label for="player-count">Nombre de joueurs :</label>
                 <input type="number" id="player-count" required>
+
                 <label for="event-images">Images (URLs) :</label>
                 <input type="text" id="event-images" placeholder="Entrez l'URL de l'image">
+
                 <label for="start-date">Date et Heure de Début :</label>
                 <input type="datetime-local" id="start-date" required>
+
                 <label for="end-date">Date et Heure de Fin :</label>
                 <input type="datetime-local" id="end-date" required>
+
                 <label for="organizer-pseudo">Pseudo de l'Organisateur :</label>
                 <input type="text" id="organizer-pseudo" required>
+
                 <label for="visibility">Visibilité :</label>
                 <select id="visibility" required>
                     <option value="visible">Visible</option>
                     <option value="hidden">Non visible</option>
                     <option value="pending">En cours de validation</option>
                 </select>
+
                 <button type="submit">Créer l'Événement</button>
                 <button type="button" id="cancel-create-event-button">Annuler</button>
             </form>
         </div>
+
     </header>
 
 

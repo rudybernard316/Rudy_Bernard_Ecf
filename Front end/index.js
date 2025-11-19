@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     let currentSlide = 0;
     const slides = document.querySelectorAll('#diaporama img');
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button[onclick="nextSlide()"]').addEventListener('click', nextSlide);
     document.querySelector('button[onclick="prevSlide()"]').addEventListener('click', prevSlide);
 
-
     document.querySelectorAll('.submenu a').forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showEventDetails(title, date, playerCount) {
         alert(`Titre de l'événement : ${title}\nDate/Heure : ${date}\nNombre de joueurs : ${playerCount}`);
     }
-
 
     // Simulez un utilisateur avec le rôle d'administrateur
     let currentUser = { role: 'administrateur' };
@@ -78,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Écouteur d'événements pour le bouton "Annuler"
     document.getElementById('cancel-login-button').addEventListener('click', closeLoginForm);
-
 
     // Gérer la soumission du formulaire de connexion
     document.getElementById('form-login').addEventListener('submit', function (event) {
@@ -247,6 +243,7 @@ function cancelRegistration(eventTitle) {
     }
 }
 
+// Gérer la soumission du formulaire de création d'événement
 document.getElementById('form-create-event').addEventListener('submit', async function (event) {
     event.preventDefault(); // Empêche le rechargement de la page
     await createEvent(); // Appel à la fonction pour créer l'événement
@@ -288,7 +285,7 @@ document.getElementById('form-filter-events').addEventListener('submit', functio
 
 async function filterEvents(date, maxPlayers, organizer) {
     try {
-        const response = await fetch('/api/events'); // Remplacez par l'URL de votre API pour récupérer tous les événements
+        const response = await fetch('/api/events'); //URL de l' API pour récupérer tous les événements
         const events = await response.json();
 
         // Filtrer les événements selon les critères
